@@ -54,7 +54,7 @@ pipeline {
 
     stage('Deploy Using Ansible'){
       steps{
-        ansiblePlaybook credentialsId: 'ssh-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts/', playbook: 'playbook.yml', vaultTmpPath: ''
+        ansiblePlaybook credentialsId: 'ssh-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts/', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
       }
     }
 }    
