@@ -6,8 +6,8 @@ pipeline {
     }
   
   environment {	
-		DOCKERHUB_CREDENTIALS=credentials('docker-cred')
-	} 
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}  
 
   stages {
     stage('SCM Checkout'){
@@ -41,7 +41,8 @@ pipeline {
    stage('Docker Login'){
      steps{
        echo 'Login to Docker Hub'
-       sh 'echo $docker-pass | docker login -u $docker-user --password-stdin'}
+       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+     }
      }
 
   stage('Push the Image to Docker Hub'){
