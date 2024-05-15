@@ -8,7 +8,12 @@ pipeline {
   environment {	
 		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
 	}  
-
+        stage('Clean Workspace') {
+            steps {
+                // Clean the workspace
+                cleanWs()
+            }
+        }
   stages {
     stage('SCM Checkout'){
       steps{
