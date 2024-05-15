@@ -4,6 +4,10 @@ pipeline {
   tools {
     maven 'M2_HOME'
     }
+  
+  environment {	
+		DOCKERHUB_CREDENTIALS=credentials('docker-cred')
+	} 
 
   stages {
     stage('SCM Checkout'){
@@ -37,10 +41,7 @@ pipeline {
    stage('Docker Login'){
      steps{
        echo 'Login to Docker Hub'
-       withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'docker-pass', usernameVariable: 'docker-user')]) {
-       sh 'echo ${docker-pass} | docker login -u ${docker-user} --password-stdin'
-        }
-       
+       sh 'echo ${docker-pass} | docker login -u ${docker-user} --password-stdin'      
       }
      }
 
