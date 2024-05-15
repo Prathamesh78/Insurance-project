@@ -19,6 +19,13 @@ pipeline {
         sh 'mvn clean package'
         }
     }
+
+    stage('Publish Test Reports'){
+      steps{
+        echo 'Generating Test Reports'
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/InsureMe-Pipeline/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+      }
+    }
   }    
 }    
   
