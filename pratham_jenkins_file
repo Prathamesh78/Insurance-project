@@ -9,7 +9,7 @@ pipeline {
     stage('SCM Checkout){
       steps{
         echo 'Checkout the Source Code from Github Repository'
-        git branch: 'main', url: 'https://github.com/Prathamesh78/BankingApp.git'
+        git branch: 'master', url: 'https://github.com/Prathamesh78/BankingApp.git'
         }
     }
 
