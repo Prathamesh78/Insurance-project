@@ -34,7 +34,22 @@ pipeline {
       }
    }
 
-  
-  }    
+   stage('Docker Login'){
+     steps{
+       echo 'Login to Docker Hub'
+       withCredentials([usernamePassword(credentialsId: 'Dockerlogin-user', passwordVariable: 'DockerPass', usernameVariable: 'Dockerlogin')]) {
+       sh 'docker login -u $(Dockerlogin) -p $(Dockerpass)'
+        }
+      }
+     }
+
+  stage('Push the Image to Docker Hub'){
+    steps{
+      echo 'Push the Image'
+      sh 'docker push prathamesh78/insureme:1.0'
+      }
+   }
+
+    }    
 }    
   
