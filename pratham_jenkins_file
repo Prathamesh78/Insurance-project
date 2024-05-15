@@ -15,7 +15,7 @@ pipeline {
 
     stage('Package the file'){
       steps{
-        echo 'Create Artifacts'
+        echo 'Creating Artifacts'
         sh 'mvn clean package'
         }
     }
@@ -26,6 +26,15 @@ pipeline {
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/InsureMe-Pipeline/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
       }
     }
+
+   stage('Generate Docker Images'){
+     steps{
+       echo 'Creating Image using the package'
+       sh 'docker build -t prathamesh78/insureme:1.0 .'
+      }
+   }
+
+  
   }    
 }    
   
