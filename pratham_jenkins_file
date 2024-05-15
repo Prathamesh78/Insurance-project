@@ -10,19 +10,19 @@ pipeline {
 	}  
         
   stages {
+
+	stage('Clean Workspace') {
+            steps {
+                // Clean the workspace
+                cleanWs()
+            }
+        }
     stage('SCM Checkout'){
       steps{
         echo 'Checkout the Source Code from Github Repository'
         git branch: 'master', url: 'https://github.com/Prathamesh78/BankingApp.git'
         }
     }
-
-    stage('Clean Workspace') {
-            steps {
-                // Clean the workspace
-                cleanWs()
-            }
-        }
 
     stage('Package the file'){
       steps{
