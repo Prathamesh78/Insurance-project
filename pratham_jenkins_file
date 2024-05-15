@@ -31,27 +31,32 @@ pipeline {
       }
     }
 
-   stage('Generate Docker Images'){
+    stage('Generate Docker Images'){
      steps{
        echo 'Creating Image using the package'
        sh 'docker build -t prathamesh78/insureme:1.0 .'
       }
    }
 
-   stage('Docker Login'){
+    stage('Docker Login'){
      steps{
        echo 'Login to Docker Hub'
        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
      }
-     }
+    }
 
-  stage('Push the Image to Docker Hub'){
-    steps{
-      echo 'Push the Image'
-      sh 'docker push prathamesh78/insureme:1.0'
+    stage('Push the Image to Docker Hub'){
+      steps{
+        echo 'Push the Image'
+        sh 'docker push prathamesh78/insureme:1.0'
       }
    }
 
-    }    
+    stage('Deploy Using Ansible'){
+      steps{
+        ansiblePlaybook credentialsId: 'ssh-user', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
+      }
+    }
+}    
 }    
   
