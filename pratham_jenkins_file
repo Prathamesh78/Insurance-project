@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+
+  tools {
+    maven 'M2_HOME'
+    }
+
+  stages {
+    stage('SCM Checkout){
+      steps{
+        echo 'Checkout the Source Code from Github Repository'
+        git branch: 'main', url: 'https://github.com/Prathamesh78/BankingApp.git'
+        }
+    }
+
+    stage('Package the file'){
+      steps{
+        echo 'Create Artifacts'
+        sh 'mvn clean package'
+        }
+    }
+  }    
+}    
+  
