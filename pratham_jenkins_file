@@ -6,7 +6,7 @@ pipeline {
     }
 
   stages {
-    stage('SCM Checkout){
+    stage('SCM Checkout'){
       steps{
         echo 'Checkout the Source Code from Github Repository'
         git branch: 'master', url: 'https://github.com/Prathamesh78/BankingApp.git'
