@@ -8,12 +8,7 @@ pipeline {
   environment {	
 		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
 	}  
-        stage('Clean Workspace') {
-            steps {
-                // Clean the workspace
-                cleanWs()
-            }
-        }
+        
   stages {
     stage('SCM Checkout'){
       steps{
@@ -21,6 +16,13 @@ pipeline {
         git branch: 'master', url: 'https://github.com/Prathamesh78/BankingApp.git'
         }
     }
+
+    stage('Clean Workspace') {
+            steps {
+                // Clean the workspace
+                cleanWs()
+            }
+        }
 
     stage('Package the file'){
       steps{
